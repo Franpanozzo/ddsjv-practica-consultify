@@ -28,7 +28,7 @@ public abstract class Consulta {
     criterioPausa.chequearReactivacion(this);
   }
 
-  public void pausarManualmente() {
+  public void despausarManualmente() {
     if(criterioPausa.permitirDespausaManual()) {
       this.despausar();
     }
@@ -43,5 +43,4 @@ public abstract class Consulta {
     return !pausada && LocalDateTime.now().isBefore(limite);
   }
 
-  public abstract boolean todasRespondidas();
 }

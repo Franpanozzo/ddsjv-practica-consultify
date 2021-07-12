@@ -2,25 +2,22 @@ package consultas;
 
 import excepciones.NoPreguntasAbiertasEnEncuesta;
 import preguntas.Pregunta;
+import preguntas.PreguntaMultiValuada;
 import preguntas.PreguntaTextoLibre;
+import preguntas.RespuestaPosible;
+
+import java.util.List;
 
 public class Encuesta extends Consulta {
-  Pregunta pregunta;
+  PreguntaMultiValuada pregunta;
 
-  public Encuesta(Pregunta pregunta) {
-    this.pregunta = this.chequearNoEsAbierta(pregunta);
+  public Encuesta(PreguntaMultiValuada pregunta) {
+    this.pregunta = pregunta;
   }
 
-  @Override
-  public boolean todasRespondidas() {
-    return pregunta.tieneRespuesta();
-  }
-
-  public Pregunta chequearNoEsAbierta(Pregunta pregunta) {
-    if (pregunta.esAbierta()) {
-        throw new NoPreguntasAbiertasEnEncuesta("No puede haber preguntas habiertas en encuestas");
-    }
-    return pregunta;
+  //Adentro los valoresposibles tiene la cantidad de elecciones para esa opcion
+  public List<RespuestaPosible> resultadosEncuesta() {
+    return pregunta.getValoresPosibles();
   }
 
 }

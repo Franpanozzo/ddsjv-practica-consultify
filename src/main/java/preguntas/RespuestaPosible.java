@@ -4,12 +4,17 @@ public class RespuestaPosible {
   public String posibleRespuesta;
   public int vecesElegida;
 
-  public boolean esPosibleRespuesta(String posibleRespuesta) {
-    return this.posibleRespuesta.equals(posibleRespuesta);
+  public RespuestaPosible(String posibleRespuesta, int vecesElegida) {
+    this.posibleRespuesta = posibleRespuesta;
+    this.vecesElegida = vecesElegida;
   }
 
-  public int getVecesElegida() {
-    return vecesElegida;
+  public boolean esPosibleRespuesta(String posibleRespuesta) {
+    if(this.posibleRespuesta.equals(posibleRespuesta)) {
+      this.elegida();
+      return true;
+    }
+    return false;
   }
 
   public void elegida() {
