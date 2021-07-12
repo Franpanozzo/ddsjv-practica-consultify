@@ -1,13 +1,10 @@
 package consultas;
 
-import finalizacionObservers.FinalizacionObserver;
 import pausados.CriterioPausa;
-import utils.DatoDeContacto;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Consulta {
@@ -16,8 +13,7 @@ public abstract class Consulta {
   Duration duracionFaltante;
   boolean pausada = false;
   CriterioPausa criterioPausa;
-  List<DatoDeContacto> datoDeContactoParticipantes;
-  List<FinalizacionObserver> finalizacionObservers = new ArrayList<>();
+  List<String> mailsParticipantes;
 
   public boolean tieneLink(String link) {
     return this.link.equals(link);
@@ -27,12 +23,12 @@ public abstract class Consulta {
     return link;
   }
 
-  public void nuevoParticipante(DatoDeContacto datoDeContacto) {
-    datoDeContactoParticipantes.add(datoDeContacto);
+  public void nuevoParticipante(String mailParticipante) {
+    mailsParticipantes.add(mailParticipante);
   }
 
   public int cantidadRespuestas() {
-    return datoDeContactoParticipantes.size();
+    return mailsParticipantes.size();
   }
 
   public void pausar() {
@@ -42,8 +38,8 @@ public abstract class Consulta {
     //cada un minuto, sino bueno que se haga siempre
   }
 
-  public List<DatoDeContacto> getDatoDeContactoParticipantes() {
-    return datoDeContactoParticipantes;
+  public List<String> getMailsParticipantes() {
+    return mailsParticipantes;
   }
 
   public void chequearReactivacion() {
@@ -65,14 +61,16 @@ public abstract class Consulta {
     return !pausada && LocalDateTime.now().isBefore(limite);
   }
 
-  public void chequearFinalizacion(){
+  public void chequearFinalizacion() {
     if(LocalDateTime.now().isAfter(limite))
-      finalizacionObservers.forEach(finalizacionObserver -> finalizacionObserver.consultaFinalizada(this));
+      this.consultaFinalizada();
   }
 
   public abstract String respuestas();
 
   public abstract boolean esEncuesta();
+
+  protected abstract void consultaFinalizada();
 }
 
 

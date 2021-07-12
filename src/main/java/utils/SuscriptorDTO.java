@@ -1,9 +1,19 @@
 package utils;
 
 public class SuscriptorDTO {
-  public void notifyByMail() {
+  public boolean notifyByMail() {
+    return false;
   }
 
-  public void notifyByTelegram() {
+  public boolean notifyByTelegram() {
+    return false;
+  }
+
+  public String mail() {
+    return null;
+  }
+
+  public String telephone() {
+    return null;
   }
 }

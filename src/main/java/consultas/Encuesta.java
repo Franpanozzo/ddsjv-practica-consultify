@@ -1,12 +1,17 @@
 package consultas;
 
+import finalizacionObservers.FinalizacionObserver;
 import preguntas.PreguntaMultiValuada;
 import preguntas.RespuestaPosible;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Encuesta extends Consulta {
   PreguntaMultiValuada pregunta;
+  List<FinalizacionObserver> finalizacionObservers = new ArrayList<>();
+
 
   public Encuesta(PreguntaMultiValuada pregunta) {
     this.pregunta = pregunta;
@@ -15,6 +20,11 @@ public class Encuesta extends Consulta {
   //Adentro los valoresposibles tiene la cantidad de elecciones para esa opcion
   public List<RespuestaPosible> resultadosEncuesta() {
     return pregunta.getValoresPosibles();
+  }
+
+  @Override
+  protected void consultaFinalizada() {
+      finalizacionObservers.forEach(finalizacionObserver -> finalizacionObserver.encuestaFinalizada(this));
   }
 
   @Override

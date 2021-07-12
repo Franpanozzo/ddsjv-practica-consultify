@@ -1,6 +1,5 @@
 package notificaciones;
 
-import utils.DatoDeContacto;
 import utils.MailSender;
 import utils.SuscriptorDTO;
 
@@ -9,8 +8,7 @@ public class Mailer implements FormaDeNotificar{
   String emailActual;
 
   @Override
-  public void notificar(DatoDeContacto datoDeContacto, String contenido, SuscriptorDTO suscriptorDTO) {
-    mailer.send(emailActual, datoDeContacto.getMail(), contenido);
-    suscriptorDTO.notifyByMail();
+  public void notificar(String contenido, SuscriptorDTO suscriptorDTO) {
+    mailer.send(emailActual, suscriptorDTO.mail(), contenido);
   }
 }

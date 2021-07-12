@@ -23,4 +23,10 @@ public class Formularios extends Consulta{
   public boolean esEncuesta() {
     return false;
   }
+
+  @Override
+  protected void consultaFinalizada() {
+
+  }
+
 }

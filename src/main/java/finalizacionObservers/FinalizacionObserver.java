@@ -1,10 +1,7 @@
 package finalizacionObservers;
 
-import consultas.Consulta;
-import utils.DatoDeContacto;
-
-import java.util.List;
+import consultas.Encuesta;
 
 public interface FinalizacionObserver {
-  void consultaFinalizada(Consulta consulta);
+  void encuestaFinalizada(Encuesta encuesta);
 }
