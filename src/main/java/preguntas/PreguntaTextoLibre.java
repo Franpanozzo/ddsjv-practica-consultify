@@ -9,7 +9,8 @@ public class PreguntaTextoLibre implements TipoPregunta{
   }
 
   @Override
-  public void registrarRespuesta(String respuesta) {
-    this.respuesta = respuesta;
+  public boolean esAbierta() {
+    return true;
   }
+
 }

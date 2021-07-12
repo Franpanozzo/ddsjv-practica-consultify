@@ -17,7 +17,7 @@ public class Encuesta extends Consulta {
   }
 
   public Pregunta chequearNoEsAbierta(Pregunta pregunta) {
-    if (pregunta.getTipoPregunta().toString().equals(PreguntaTextoLibre.class.toString())) {
+    if (pregunta.esAbierta()) {
         throw new NoPreguntasAbiertasEnEncuesta("No puede haber preguntas habiertas en encuestas");
     }
     return pregunta;

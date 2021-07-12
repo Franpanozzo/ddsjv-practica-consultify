@@ -7,11 +7,12 @@ import java.util.Locale;
 public class Pregunta {
   String pregunta;
   TipoPregunta tipoPregunta;
+  String respuesta;
 
   public void responderPregunta(String respuesta) {
     String respuestaEnSist = respuesta.toUpperCase(Locale.ROOT);
     this.chequearRespuestaPosible(respuestaEnSist);
-    tipoPregunta.registrarRespuesta(respuesta);
+    this.respuesta = respuestaEnSist;
   }
 
   public TipoPregunta getTipoPregunta() {
@@ -25,6 +26,10 @@ public class Pregunta {
   }
 
   public boolean tieneRespuesta() {
-    return !tipoPregunta.noEstaVacia();
+    return !respuesta.isEmpty();
+  }
+
+  public boolean esAbierta() {
+    return tipoPregunta.esAbierta();
   }
 }
