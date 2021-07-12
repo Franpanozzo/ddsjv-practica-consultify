@@ -5,9 +5,12 @@ import excepciones.NoEsRespuestaValidaException;
 import java.util.Locale;
 
 public class Pregunta {
-  String pregunta;
   TipoPregunta tipoPregunta;
   String respuesta;
+
+  public String getRespuesta() {
+    return respuesta;
+  }
 
   public void responderPregunta(String respuesta) {
     String respuestaEnSist = respuesta.toUpperCase(Locale.ROOT);

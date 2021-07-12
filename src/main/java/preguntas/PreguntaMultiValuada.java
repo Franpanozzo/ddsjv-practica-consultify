@@ -6,7 +6,12 @@ import java.util.List;
 
 //Una pregunta binaria es una multivaluada pero que ingresen el SI y NO nomas como valoresPosibles;
 public class PreguntaMultiValuada implements TipoPregunta{
+  String pregunta;
   List<RespuestaPosible> valoresPosibles = new ArrayList<>();
+
+  public String getPregunta() {
+    return pregunta;
+  }
 
   @Override
   public boolean esRespuestaPosible(String respuesta) {

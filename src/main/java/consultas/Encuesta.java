@@ -1,9 +1,6 @@
 package consultas;
 
-import excepciones.NoPreguntasAbiertasEnEncuesta;
-import preguntas.Pregunta;
 import preguntas.PreguntaMultiValuada;
-import preguntas.PreguntaTextoLibre;
 import preguntas.RespuestaPosible;
 
 import java.util.List;
@@ -20,4 +17,17 @@ public class Encuesta extends Consulta {
     return pregunta.getValoresPosibles();
   }
 
+  @Override
+  public String respuestas() {
+    return this.resultadosEncuesta().toString();
+  }
+
+  @Override
+  public boolean esEncuesta() {
+    return true;
+  }
+
+  public String preguntaTextual() {
+    return pregunta.getPregunta();
+  }
 }
