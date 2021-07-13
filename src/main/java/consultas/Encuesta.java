@@ -3,6 +3,7 @@ package consultas;
 import finalizacionObservers.FinalizacionObserver;
 import preguntas.PreguntaMultiValuada;
 import preguntas.RespuestaPosible;
+import respuestas.RespuestaPregunta;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,6 +29,11 @@ public class Encuesta extends Consulta {
   }
 
   @Override
+  public boolean respondidaAdecuadamente(List<RespuestaPregunta> respuestas) {
+    RespuestaPregunta respuestaPregunta = respuestas.get(0);
+    return pregunta.esRespuestaPosible(respuestaPregunta.getRespuesta());
+  }
+
   public String respuestas() {
     return this.resultadosEncuesta().toString();
   }

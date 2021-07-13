@@ -1,6 +1,7 @@
 package consultas;
 
 import pausados.CriterioPausa;
+import respuestas.RespuestaPregunta;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -13,7 +14,6 @@ public abstract class Consulta {
   Duration duracionFaltante;
   boolean pausada = false;
   CriterioPausa criterioPausa;
-  List<String> mailsParticipantes;
 
   public boolean tieneLink(String link) {
     return this.link.equals(link);
@@ -23,23 +23,11 @@ public abstract class Consulta {
     return link;
   }
 
-  public void nuevoParticipante(String mailParticipante) {
-    mailsParticipantes.add(mailParticipante);
-  }
-
-  public int cantidadRespuestas() {
-    return mailsParticipantes.size();
-  }
-
   public void pausar() {
     pausada = true;
     duracionFaltante = Duration.ofMinutes(LocalDateTime.now().until(limite, ChronoUnit.MINUTES));
     //Aca nose si se puede decirle al cron que llame al metodo this.cehquearReactivacion()
     //cada un minuto, sino bueno que se haga siempre
-  }
-
-  public List<String> getMailsParticipantes() {
-    return mailsParticipantes;
   }
 
   public void chequearReactivacion() {
@@ -66,11 +54,11 @@ public abstract class Consulta {
       this.consultaFinalizada();
   }
 
-  public abstract String respuestas();
-
   public abstract boolean esEncuesta();
 
   protected abstract void consultaFinalizada();
+
+  public abstract boolean respondidaAdecuadamente(List<RespuestaPregunta> respuestas);
 }
 
 

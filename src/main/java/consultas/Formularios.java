@@ -1,6 +1,7 @@
 package consultas;
 
 import preguntas.Pregunta;
+import respuestas.RespuestaPregunta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +11,6 @@ public class Formularios extends Consulta{
   List<Pregunta> preguntasObl = new ArrayList<>();
   List<Pregunta> preguntasOpc = new ArrayList<>();
 
-  public boolean todasRespondidas() {
-    return preguntasObl.stream().allMatch(Pregunta::tieneRespuesta);
-  }
-
-  @Override
-  public String respuestas() {
-    return preguntasObl.stream().map(Pregunta::getRespuesta).collect(Collectors.toList()).toString();
-  }
-
   @Override
   public boolean esEncuesta() {
     return false;
@@ -27,6 +19,13 @@ public class Formularios extends Consulta{
   @Override
   protected void consultaFinalizada() {
 
+  }
+
+  @Override
+  public boolean respondidaAdecuadamente(List<RespuestaPregunta> respuestas) {
+    List<Pregunta> preguntasRespondidas = respuestas.stream().map(RespuestaPregunta::getPregunta).collect(Collectors.toList());
+    respuestas.stream().forEach(RespuestaPregunta::respondidaAdecuadamente);
+    return preguntasRespondidas.containsAll(preguntasObl);
   }
 
 }

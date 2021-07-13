@@ -4,6 +4,7 @@ import consultas.Encuesta;
 import notificaciones.FormaDeNotificar;
 import notificaciones.Mailer;
 import notificaciones.Telegramer;
+import respuestas.RepositorioRespuestas;
 import utils.SuscriptorDTO;
 import utils.SuscriptoresSystem;
 
@@ -17,7 +18,8 @@ public class EnviarResultadosObserver implements FinalizacionObserver{
 
   @Override
   public void encuestaFinalizada(Encuesta encuesta) {
-    encuesta.getMailsParticipantes().forEach(mail -> this.enviarNotificacion(mail,encuesta.respuestas()));
+    RepositorioRespuestas.getInstance().mailsQueRespondieron(encuesta)
+        .forEach(mail -> this.enviarNotificacion(mail,encuesta.respuestas()));
   }
 
   private void enviarNotificacion(String mail, String respuestas) {
